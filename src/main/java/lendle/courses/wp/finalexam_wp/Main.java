@@ -6,8 +6,10 @@
 package lendle.courses.wp.finalexam_wp;
 
 import javax.swing.DefaultListModel;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
+import javax.swing.WindowConstants;
 
 /**
  *
@@ -23,7 +25,7 @@ public class Main extends javax.swing.JFrame {
         this.jList1.setModel(new DefaultListModel<String>());
         this.setSize(1024, 600);
     }
-
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -102,11 +104,14 @@ public class Main extends javax.swing.JFrame {
         //每個 TaskFrame 有 title 和 content，這裡要跳出 input dialog 詢問使用者 title
         //如果 title 跟現有的重疊要跳出訊息說 "不可以重複"
         //否則，開啟新的 TaskFrame
+        JFrame frame = new JFrame();
         String title = JOptionPane.showInternalInputDialog(this.jDesktopPane1, "請輸入 title:");
         DefaultListModel model = (DefaultListModel) this.jList1.getModel();
         if (model.contains(title)) {
             //Q1: 開啟 message dialog （10%）
+            JOptionPane.showMessageDialog(frame, title);
             
+                
             ////////////////////
             return;
         }
@@ -114,7 +119,8 @@ public class Main extends javax.swing.JFrame {
         model.addElement(title);
         //Q2: 建立 TaskFrame（等同於 JInternalFrame）
         //加到 jDesktopPane1 (20%)
-        
+        TaskFrame taskFrame = new TaskFrame();
+        this.add(taskFrame);
         ///////////////////////////////////////
     }//GEN-LAST:event_buttonNewActionPerformed
 
@@ -133,7 +139,10 @@ public class Main extends javax.swing.JFrame {
             //Q3: 建立 TaskFrame（等同於 JInternalFrame）
             //設定 noteTitle, noteContent
             //加到 jDesktopPane1 (20%)
-            
+            TaskFrame taskframe = new TaskFrame();
+            taskframe.setNoteTitle(title);
+            taskframe.setNoteContent(content);
+            this.add(taskframe);
             //////////////////////////////////////////
         }
     }//GEN-LAST:event_jList1MouseClicked

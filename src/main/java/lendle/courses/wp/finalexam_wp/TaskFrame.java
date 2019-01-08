@@ -13,6 +13,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -32,11 +33,19 @@ public class TaskFrame extends JInternalFrame {
     private JTextField textTitle = null;
     private JTextArea textContent = null;
     private boolean modified = false;
+    JTextArea jTextArea = new JTextArea();
 
     public TaskFrame() {
         this.setSize(500, 300);
         //Q4: layout 出如圖所示的樣子，
         //記得 JTextArea 要放在捲軸裡面 (30%)
+        JTextField jTextField = new JTextField();
+        JTextArea jTextArea = new JTextArea();
+        BorderLayout borderLayout = new BorderLayout();
+        jTextField.setLayout(borderLayout);
+        jTextArea.setLayout(borderLayout);
+        this.add(jTextArea,"south");
+        this.add(jTextArea,"south");
         ////////////////////////////
         this.setClosable(true);
         this.setResizable(true);
@@ -69,6 +78,7 @@ public class TaskFrame extends JInternalFrame {
             public void internalFrameClosing(InternalFrameEvent e) {
                 if (modified) {
                     //Q5: 發現變更，顯示 confirm dialog 詢問是否要儲存 (20%)
+                    int result = JOptionPane.showConfirmDialog(southPanel,"是否要儲存?","test",JOptionPane.YES_NO_CANCEL_OPTION);
                     int ret = -1;
                     /////////////////////////////////////////////
                     if (ret == JOptionPane.YES_OPTION) {
